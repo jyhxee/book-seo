@@ -6,8 +6,14 @@ const SearchComponent = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    if (search) {
+    if (search.trim()) {
       navigate(`/search?query=${search}`);
+    }
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
     }
   };
 
@@ -17,9 +23,12 @@ const SearchComponent = () => {
         type="text"
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        onKeyPress={handleKeyPress}
         placeholder="Search for a book"
       />
-      <button onClick={handleSearch}>Search</button>
+      <button onClick={handleSearch} disabled={!search.trim()}>
+        Search
+      </button>
     </div>
   );
 };
