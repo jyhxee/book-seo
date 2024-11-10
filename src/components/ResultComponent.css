@@ -1,0 +1,46 @@
+.results-container {
+  width: 90%;
+  max-width: 1000px;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 -2px 0 rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  text-align: center;
+}
+
+/* h2 헤더 스타일 */
+h2 {
+  font-size: 24px;
+  color: #333;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* 리스트 및 책 아이템 스타일은 그대로 유지 */
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.book-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.book-cover {
+  width: 80px;
+  height: 120px;
+  margin-right: 20px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.book-details {
+  text-align: left;
+  flex-grow: 1;
+}
