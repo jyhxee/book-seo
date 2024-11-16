@@ -1,3 +1,4 @@
+/* 결과 컨테이너 스타일 */
 .results-container {
   width: 90%;
   max-width: 1000px;
@@ -9,7 +10,7 @@
   text-align: center;
 }
 
-/* h2 헤더 스타일 */
+/* 헤더 스타일 */
 h2 {
   font-size: 24px;
   color: #333;
@@ -17,30 +18,88 @@ h2 {
   margin-bottom: 15px;
 }
 
-/* 리스트 및 책 아이템 스타일은 그대로 유지 */
-ul {
-  list-style-type: none;
+/* 책 목록 스타일 */
+.book-list {
+  list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .book-item {
   display: flex;
-  align-items: center;
-  padding: 15px 10px;
-  margin-bottom: 10px;
+  gap: 10px;
   border-bottom: 1px solid #ddd;
+  padding: 15px 0;
+  transition: all 0.2s ease; /* 호버 애니메이션 */
+}
+
+.book-item:hover {
+  background-color: #f9f9f9;
+  transform: translateY(-2px);
 }
 
 .book-cover {
   width: 80px;
-  height: 120px;
-  margin-right: 20px;
-  object-fit: cover;
+  height: auto;
+  object-fit: cover; /* 비율 유지 */
   flex-shrink: 0;
 }
 
+/* 책 세부 정보 스타일 */
 .book-details {
+  flex: 1;
   text-align: left;
-  flex-grow: 1;
+}
+
+.book-details strong {
+  font-size: 16px;
+  color: #333;
+}
+
+/* 저자와 출판사 사이 구분선 */
+.book-author-publisher {
+  font-size: 14px;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.divider {
+  margin: 0 10px;
+  color: #ddd;
+  font-size: 18px;
+}
+
+/* 가격 표 스타일 */
+.book-price {
+  margin-top: 10px;
+  display: table;
+  width: 100%;
+}
+
+.price-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px; /* 폰트 크기 줄이기 */
+}
+
+.price-table th,
+.price-table td {
+  text-align: center;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+}
+
+.price-table th {
+  background-color: #f1f1f1;
+  color: #383838;
+}
+
+.price-table td {
+  font-size: 12px; /* 내용 폰트 크기 줄이기 */
+}
+
+.price-table td.price {
+  font-size: 12.5px;
+  font-weight: bold;
 }
