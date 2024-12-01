@@ -1,4 +1,3 @@
-/* 결과 컨테이너 스타일 */
 .results-container {
   width: 90%;
   max-width: 1000px;
@@ -10,7 +9,6 @@
   text-align: center;
 }
 
-/* 헤더 스타일 */
 h2 {
   font-size: 24px;
   color: #333;
@@ -18,7 +16,6 @@ h2 {
   margin-bottom: 15px;
 }
 
-/* 책 목록 스타일 */
 .book-list {
   list-style: none;
   padding: 0;
@@ -30,22 +27,20 @@ h2 {
   gap: 10px;
   border-bottom: 1px solid #ddd;
   padding: 15px 0;
-  transition: all 0.2s ease; /* 호버 애니메이션 */
+  transition: all 0.2s ease;
 }
 
 .book-item:hover {
-  background-color: #f9f9f9;
-  transform: translateY(-2px);
+  background-color: #f3f3f3;
 }
 
 .book-cover {
   width: 80px;
   height: auto;
-  object-fit: cover; /* 비율 유지 */
+  object-fit: cover;
   flex-shrink: 0;
 }
 
-/* 책 세부 정보 스타일 */
 .book-details {
   flex: 1;
   text-align: left;
@@ -56,7 +51,6 @@ h2 {
   color: #333;
 }
 
-/* 저자와 출판사 사이 구분선 */
 .book-author-publisher {
   font-size: 14px;
   color: #666;
@@ -70,7 +64,20 @@ h2 {
   font-size: 18px;
 }
 
-/* 가격 표 스타일 */
+a {
+  text-decoration: none;
+  color: inherit; /* 기본 텍스트 색상 유지 */
+}
+
+a:visited {
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: inherit;
+}
+
 .book-price {
   margin-top: 10px;
   display: table;
@@ -80,7 +87,7 @@ h2 {
 .price-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 12px; /* 폰트 크기 줄이기 */
+  font-size: 12px;
 }
 
 .price-table th,
@@ -92,14 +99,33 @@ h2 {
 
 .price-table th {
   background-color: #f1f1f1;
-  color: #383838;
+  color: #000;
 }
 
 .price-table td {
-  font-size: 12px; /* 내용 폰트 크기 줄이기 */
+  font-size: 12px;
 }
 
 .price-table td.price {
   font-size: 12.5px;
   font-weight: bold;
+}
+
+.price-header-link:hover {
+  text-decoration: underline;
+}
+
+.price-header-link.disabled {
+  cursor: not-allowed; /* 클릭 불가능한 커서 */
+}
+
+.price-header-link {
+  color: #000;
+  text-decoration: none;
+}
+
+.price-header-link,
+th {
+  color: inherit;
+  text-decoration: none;
 }

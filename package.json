@@ -1,4 +1,5 @@
 {
+  "proxy": "https://bookseo.junheeee-park.workers.dev",
   "name": "book-seo",
   "version": "0.1.0",
   "private": true,
