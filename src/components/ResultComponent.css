@@ -1,3 +1,41 @@
+/* 공통 링크 스타일 */
+a {
+  text-decoration: none;
+  color: inherit; /* 기본 텍스트 색상 유지 */
+}
+
+a:visited {
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* 가격 관련 링크 */
+.price-header-link,
+.price a {
+  color: #000;
+  text-decoration: none;
+}
+
+.price-header-link.disabled:hover {
+  text-decoration: none !important;
+}
+
+.price-header-link:hover,
+.price a:hover {
+  text-decoration: underline;
+}
+
+/* 비활성화된 링크 스타일 */
+.disabled-link,
+.disabled-price {
+  text-decoration: none !important;
+  cursor: text;
+}
+
+/* 결과 컨테이너 */
 .results-container {
   width: 90%;
   max-width: 1000px;
@@ -9,31 +47,34 @@
   text-align: center;
 }
 
+/* 제목 스타일 */
 h2 {
   font-size: 24px;
   color: #333;
-  text-align: center;
   margin-bottom: 15px;
 }
 
+/* 책 목록 */
 .book-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
+/* 책 아이템 */
 .book-item {
   display: flex;
   gap: 10px;
   border-bottom: 1px solid #ddd;
   padding: 15px 0;
-  transition: all 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .book-item:hover {
   background-color: #f3f3f3;
 }
 
+/* 책 표지 */
 .book-cover {
   width: 80px;
   height: auto;
@@ -41,6 +82,7 @@ h2 {
   flex-shrink: 0;
 }
 
+/* 책 세부 정보 */
 .book-details {
   flex: 1;
   text-align: left;
@@ -64,23 +106,9 @@ h2 {
   font-size: 18px;
 }
 
-a {
-  text-decoration: none;
-  color: inherit; /* 기본 텍스트 색상 유지 */
-}
-
-a:visited {
-  color: inherit;
-}
-
-a:hover {
-  text-decoration: underline;
-  color: inherit;
-}
-
+/* 가격 테이블 */
 .book-price {
   margin-top: 10px;
-  display: table;
   width: 100%;
 }
 
@@ -109,33 +137,4 @@ a:hover {
 .price-table td.price {
   font-size: 12.5px;
   font-weight: bold;
-}
-
-.price-header-link:hover {
-  text-decoration: underline;
-}
-
-.price-header-link.disabled:hover {
-  text-decoration: none !important;
-}
-
-.price-header-link {
-  color: #000;
-  text-decoration: none;
-}
-
-.price-header-link,
-th {
-  color: inherit;
-  text-decoration: none;
-}
-/* 가격 있는 링크 호버 시 언더라인 */
-.price a:hover {
-  text-decoration: underline;
-}
-
-/* 링크가 없을 때 스타일 */
-.disabled-link {
-  text-decoration: none !important;
-  cursor: text;
 }

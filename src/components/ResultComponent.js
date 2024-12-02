@@ -8,15 +8,15 @@ const fetchResults = async (query) => {
   try {
     const response = await fetch(`${API_URL}?query=${query}`);
     const data = await response.json();
-    return data.item;
+    return data.item || []; // 데이터가 없을 경우 빈 배열 반환
   } catch (error) {
     console.error("알라딘 API에서 데이터를 불러오는 데 실패했습니다:", error);
     return [];
   }
 };
 
-const PriceLink = ({ link, label }) => {
-  return link ? (
+const PriceLink = ({ link, label }) =>
+  link ? (
     <a
       href={link}
       target="_blank"
@@ -28,10 +28,9 @@ const PriceLink = ({ link, label }) => {
   ) : (
     <span className="price-header-link disabled">{label}</span>
   );
-};
 
-const PriceCell = ({ link, price }) => {
-  return price ? (
+const PriceCell = ({ link, price }) =>
+  price ? (
     <a
       href={link || "#"}
       target={link ? "_blank" : "_self"}
@@ -43,26 +42,22 @@ const PriceCell = ({ link, price }) => {
   ) : (
     <span className="disabled-price">정보 없음</span>
   );
-};
 
 const ResultComponent = ({ query }) => {
   const [results, setResults] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const loadResults = async () => {
+    if (query) {
       setLoading(true);
-      const data = await fetchResults(query);
-      setResults(data);
-      setLoading(false);
-    };
-
-    loadResults();
+      fetchResults(query).then((data) => {
+        setResults(data);
+        setLoading(false);
+      });
+    }
   }, [query]);
 
-  if (loading) {
-    return <p>로딩 중...</p>;
-  }
+  if (loading) return <p>로딩 중...</p>;
 
   return (
     <div className="results-container">
