@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"; // React와 useState, useEffect를 임포트
+import React, { useState, useEffect } from "react";
 import "./ResultComponent.css";
 
 const API_URL = process.env.REACT_APP_API_URL;
@@ -11,10 +11,38 @@ const fetchResults = async (query) => {
     return data.item;
   } catch (error) {
     console.error("알라딘 API에서 데이터를 불러오는 데 실패했습니다:", error);
-    console.log("API URL:", API_URL);
-    console.log("Fetching from:", `${API_URL}?query=${query}`);
     return [];
   }
+};
+
+const PriceLink = ({ link, label }) => {
+  return link ? (
+    <a
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="price-header-link"
+    >
+      {label}
+    </a>
+  ) : (
+    <span className="price-header-link disabled">{label}</span>
+  );
+};
+
+const PriceCell = ({ link, price }) => {
+  return price ? (
+    <a
+      href={link || "#"}
+      target={link ? "_blank" : "_self"}
+      rel="noopener noreferrer"
+      className={link ? "" : "disabled-link"}
+    >
+      {price.toLocaleString()}원
+    </a>
+  ) : (
+    <span className="disabled-price">정보 없음</span>
+  );
 };
 
 const ResultComponent = ({ query }) => {
@@ -55,124 +83,47 @@ const ResultComponent = ({ query }) => {
                     <thead>
                       <tr>
                         <th>
-                          {book.link ? (
-                            <a
-                              href={book.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="price-header-link"
-                            >
-                              새 책
-                            </a>
-                          ) : (
-                            <span className="price-header-link disabled">
-                              새 책
-                            </span>
-                          )}
+                          <PriceLink link={book.link} label="새 책" />
                         </th>
                         <th>
-                          {book.ebookLink ? (
-                            <a
-                              href={book.ebookLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="price-header-link"
-                            >
-                              e-book
-                            </a>
-                          ) : (
-                            <span className="price-header-link disabled">
-                              e-book
-                            </span>
-                          )}
+                          <PriceLink link={book.ebookLink} label="e-book" />
                         </th>
                         <th>
-                          {book.salesLink ? (
-                            <a
-                              href={book.salesLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="price-header-link"
-                            >
-                              알라딘 우주점
-                            </a>
-                          ) : (
-                            <span className="price-header-link disabled">
-                              알라딘 우주점
-                            </span>
-                          )}
+                          <PriceLink
+                            link={book.salesLink}
+                            label="알라딘 우주점"
+                          />
                         </th>
                         <th>
-                          {book.usedLink ? (
-                            <a
-                              href={book.usedLink}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="price-header-link"
-                            >
-                              중고
-                            </a>
-                          ) : (
-                            <span className="price-header-link disabled">
-                              중고
-                            </span>
-                          )}
+                          <PriceLink link={book.usedLink} label="중고" />
                         </th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
                         <td className="price">
-                          {book.priceStandard ? (
-                            <a
-                              href={book.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {book.priceStandard.toLocaleString()}원
-                            </a>
-                          ) : (
-                            "정보 없음"
-                          )}
+                          <PriceCell
+                            link={book.link}
+                            price={book.priceStandard}
+                          />
                         </td>
                         <td className="price">
-                          {book.priceEbook ? (
-                            <a
-                              href={book.ebookLink || "#"}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {book.priceEbook.toLocaleString()}원
-                            </a>
-                          ) : (
-                            "정보 없음"
-                          )}
+                          <PriceCell
+                            link={book.ebookLink}
+                            price={book.priceEbook}
+                          />
                         </td>
                         <td className="price">
-                          {book.priceSales ? (
-                            <a
-                              href={book.salesLink || "#"}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {book.priceSales.toLocaleString()}원
-                            </a>
-                          ) : (
-                            "정보 없음"
-                          )}
+                          <PriceCell
+                            link={book.salesLink}
+                            price={book.priceSales}
+                          />
                         </td>
                         <td className="price">
-                          {book.priceUsed ? (
-                            <a
-                              href={book.usedLink || "#"}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                            >
-                              {book.priceUsed.toLocaleString()}원
-                            </a>
-                          ) : (
-                            "정보 없음"
-                          )}
+                          <PriceCell
+                            link={book.usedLink}
+                            price={book.priceUsed}
+                          />
                         </td>
                       </tr>
                     </tbody>
@@ -190,6 +141,7 @@ const ResultComponent = ({ query }) => {
 };
 
 export default ResultComponent;
+
 //TODO:  책제목 옆 표 위 빈공간에 중고책로 팔러가기 // 다른 중고책도 보러가기 넣고 나중에 중고관련 사이트도 만들어보면 좋을듯
 //TODO: 우주점이 가격은 뜨면서 링크는 안되서 뭔가 불편한 상황 이거 해결
 //TODO: 코드 좀 지저분함
