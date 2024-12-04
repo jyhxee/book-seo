@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
-  const [search, setSearch] = useState(""); // 검색어 상태 추가
+  const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
   const handleSearch = (event) => {

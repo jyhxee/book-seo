@@ -1,47 +1,41 @@
-/* 네비게이션 바 전체 스타일 */
 .navbar {
   display: flex;
-  flex-direction: column; /* 세로 배치 */
-  align-items: center; /* 아이템 중앙 정렬 */
+  flex-direction: column; 
+  align-items: center; 
   padding: 10px;
 }
 
-/* 네비게이션 왼쪽 부분 스타일 (홈 버튼과 검색창) */
 .nav-left {
   display: flex;
-  justify-content: flex-start; /* 홈 버튼을 왼쪽에 배치 */
-  width: 100%; /* 전체 너비 */
-  margin-bottom: 0px; /* 홈 버튼과 검색창 사이 간격 */
-  flex-direction: row; /* 홈 버튼과 검색창을 가로로 배치 */
-  align-items: center; /* 중앙 정렬 */
+  justify-content: flex-start; 
+  width: 100%;
+  margin-bottom: 0px; 
+  flex-direction: row; 
+  align-items: center; 
 }
 
-/* 검색창 중앙 스타일 */
 .nav-center {
   display: flex;
-  justify-content: center; /* 검색창 중앙 정렬 */
-  margin-bottom: 10px; /* 검색창과 버튼 사이 간격 */
-  width: 100%; /* 화면 전체에 맞게 배치 */
+  justify-content: center;
+  margin-bottom: 10px;
+  width: 100%; 
 }
 
-/* 하단 버튼 스타일 (추천도서, 신간) */
 .nav-bottom {
   display: flex;
-  justify-content: space-between; /* 버튼들 간에 공간을 배치 */
-  width: 10%; /* 화면 전체 너비 */
-  gap: 10px; /* 버튼들 간의 간격 */
-  margin-top: 10px; /* 추천도서와 신간 버튼 간격 */
+  justify-content: space-between; 
+  width: 10%;
+  gap: 10px; 
+  margin-top: 10px; 
 }
 
-/* 버튼 스타일 */
 .nav-bottom button {
-  flex-grow: 1; /* 버튼들이 동일한 크기로 배치되도록 설정 */
-  text-align: center; /* 버튼 텍스트 중앙 정렬 */
+  flex-grow: 1; 
+  text-align: center;
 }
 
-/* 검색창 스타일 */
 .search-input {
-  width: 250px; /* 검색창 너비 */
+  width: 250px;
   padding: 5px;
   font-size: 16px;
 }
