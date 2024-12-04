@@ -1,15 +1,7 @@
 import React from "react";
 
-import SearchComponent from "../components/SearchComponent";
-
 const MainPage = () => {
-  return (
-    <div>
-      book-seo
-      <br />
-      <SearchComponent />
-    </div>
-  );
+  return <div>{/* 나중에 책 목록과 구분하는 줄 추가 */}</div>;
 };
 
 export default MainPage;
