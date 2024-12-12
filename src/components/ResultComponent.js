@@ -1,16 +1,33 @@
 import React, { useState, useEffect } from "react";
 import "./ResultComponent.css";
 
-const API_URL = process.env.REACT_APP_API_URL;
+const BOOK_API_URL = process.env.REACT_APP_BOOK_API_URL;
+const EBOOK_API_URL = process.env.REACT_APP_EBOOK_API_URL;
 
 const fetchResults = async (query) => {
   if (!query) return [];
   try {
-    const response = await fetch(`${API_URL}?query=${query}`);
+    const response = await fetch(`${BOOK_API_URL}?query=${query}`);
     const data = await response.json();
     return data.item || []; // 데이터가 없을 경우 빈 배열 반환
   } catch (error) {
     console.error("알라딘 API에서 데이터를 불러오는 데 실패했습니다:", error);
+    return [];
+  }
+};
+
+const fetchEbookResults = async (query) => {
+  if (!query) return [];
+  try {
+    const response = await fetch(`${EBOOK_API_URL}?query=${query}`);
+    const data = await response.json();
+    return data.item.map((ebook) => ({
+      itemId: ebook.subInfo?.paperBookList?.[0]?.itemId || null,
+      ebookLink: ebook.link,
+      priceEbook: ebook.priceSales,
+    })); // eBook 정보 변환
+  } catch (error) {
+    console.error("e-book API에서 데이터를 불러오는 데 실패했습니다:", error);
     return [];
   }
 };
@@ -45,15 +62,19 @@ const PriceCell = ({ link, price }) =>
 
 const ResultComponent = ({ query }) => {
   const [results, setResults] = useState([]);
+  const [ebookResults, setEbookResults] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     if (query) {
       setLoading(true);
-      fetchResults(query).then((data) => {
-        setResults(data);
-        setLoading(false);
-      });
+      Promise.all([fetchResults(query), fetchEbookResults(query)]).then(
+        ([bookData, ebookData]) => {
+          setResults(bookData);
+          setEbookResults(ebookData);
+          setLoading(false);
+        }
+      );
     }
   }, [query]);
 
@@ -62,7 +83,7 @@ const ResultComponent = ({ query }) => {
   return (
     <div className="results-container">
       <h2>"{query}"에 대한 검색 결과</h2>
-      {results.length > 0 ? (
+      {results.length > 0 || ebookResults.length > 0 ? (
         <ul className="book-list">
           {results.map((book) => (
             <li key={book.itemId} className="book-item">
@@ -81,7 +102,13 @@ const ResultComponent = ({ query }) => {
                           <PriceLink link={book.link} label="새 책" />
                         </th>
                         <th>
-                          <PriceLink link={book.ebookLink} label="e-book" />
+                          <PriceLink
+                            link={
+                              ebookResults.find((e) => e.itemId === book.itemId)
+                                ?.ebookLink
+                            }
+                            label="e-book"
+                          />
                         </th>
                         <th>
                           <PriceLink
@@ -104,8 +131,14 @@ const ResultComponent = ({ query }) => {
                         </td>
                         <td className="price">
                           <PriceCell
-                            link={book.ebookLink}
-                            price={book.priceEbook}
+                            link={
+                              ebookResults.find((e) => e.itemId === book.itemId)
+                                ?.ebookLink
+                            }
+                            price={
+                              ebookResults.find((e) => e.itemId === book.itemId)
+                                ?.priceEbook
+                            }
                           />
                         </td>
                         <td className="price">
@@ -140,3 +173,5 @@ export default ResultComponent;
 //TODO:  책제목 옆 표 위 빈공간에 중고책로 팔러가기 // 다른 중고책도 보러가기 넣고 나중에 중고관련 사이트도 만들어보면 좋을듯
 //TODO: 우주점이 가격은 뜨면서 링크는 안되서 뭔가 불편한 상황 이거 해결
 //TODO: 코드 좀 지저분함
+
+//TODO: E-book 다른 방식으로 해야할듯
